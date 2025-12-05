@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f4f4f4; }
+        h1, h2 { color: #333; }
+        
+        .mapa-mesas { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
+        .mesa {
+            width: 100px; height: 100px; border-radius: 8px; display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+            cursor: pointer; border: 2px solid #999; font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .mesa:hover { transform: scale(1.05); }
+        
+        .verde { background-color: #2e9731; color: #1b5e20; }
+        .amarelo { background-color: #d3c11c; color: #f57f17; } 
+        .vermelho { background-color: #ef9a9a; color: #b71c1c; } 
+
+        .container { display: flex; gap: 20px; }
+        .form-section, .list-section { background: white; padding: 20px; border-radius: 8px; flex: 1; }
+        input, select, button { width: 100%; padding: 10px; margin-bottom: 10px; }
+        button { background-color: #333; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #555; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .btn-cancel { background-color: #d32f2f; }
+    </style>
+</head>
+<body>
+    <h1>Sistema de Reservas - Restaurante</h1>
+
+    <h2>Mapa do Salão (Hoje)</h2>
+    <div id="mapaMesas" class="mapa-mesas">Carregando mapa...</div>
+
+    <div class="container">
+        <div class="form-section">
+            <h2>Nova Reserva</h2>
+            <form id="formReserva">
+                <input type="text" id="cliente" placeholder="Nome do Cliente" required>
+                <input type="text" id="contato" placeholder="Contato / Telefone" required>
+                <input type="number" id="mesa" placeholder="Número da Mesa" required>
+                <input type="number" id="pessoas" placeholder="Qtd. Pessoas" required>
+                <label>Data e Hora:</label>
+                <input type="datetime-local" id="dataHora" required>
+                <input type="text" id="observacoes" placeholder="Observações (opcional)">
+                <button type="submit">Reservar Mesa</button>
+            </form>
+            <div id="msg" style="margin-top: 10px;"></div>
+        </div>
+
+        <div class="list-section">
+            <h2>Reservas Agendadas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mesa</th>
+                        <th>Cliente</th>
+                        <th>Data/Hora</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="listaReservas"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
